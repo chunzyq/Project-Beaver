@@ -18,6 +18,7 @@ public class EnemyHitPlayer : MonoBehaviour
             if (playerStats != null)
             {
                 playerStats.TakeDamage(damage);
+                Debug.Log("Player took " + damage + " damage from enemy.");
                 nextDamageTime = Time.time + damageInterval;
             }
         }
