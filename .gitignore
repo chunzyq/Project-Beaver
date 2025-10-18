@@ -99,7 +99,12 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 # Ignore all plugins
-/[Aa]ssets/Plugins/
+/[Aa]ssets/Plugins/*
+!/[Aa]ssets/Plugins/**/*.dll
+!/[Aa]ssets/Plugins/**/*.aar
+!/[Aa]ssets/Plugins/**/*.so
+!/[Aa]ssets/Plugins/**/*.bundle
+!/[Aa]ssets/Plugins/**/*.framework
 /[Aa]ssets/AstarPathfindingProject/
 /[Aa]ssets/NavMeshComponents/
 
