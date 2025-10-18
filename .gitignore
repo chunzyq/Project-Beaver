@@ -107,6 +107,7 @@ InitTestScene*.unity*
 !/[Aa]ssets/Plugins/**/*.framework
 /[Aa]ssets/AstarPathfindingProject/
 /[Aa]ssets/NavMeshComponents/
+/[Aa]ssets/FOR_TEST_SCENE/
 
 .plastic/
 .vscode/
