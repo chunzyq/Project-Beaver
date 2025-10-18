@@ -16,35 +16,13 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		movement.x = Input.GetAxisRaw("Horizontal");
-		movement.y = Input.GetAxisRaw("Vertical");
+        movement.y = Input.GetAxisRaw("Vertical");
+        movement.Normalize();
 	}
-
-    // private void LateUpdate()
-    // {
-    //     float camHeight = cam.orthographicSize * 2;
-    //     float camWidth = camHeight * cam.aspect;
-
-    //     Vector3 camPos = cam.transform.position;
-
-    //     minX = camPos.x - camWidth / 2 + offset;
-    //     maxX = camPos.x + camWidth / 2 - offset;
-    //     minY = camPos.y - camHeight / 2 + offset;
-    //     maxY = camPos.y + camHeight / 2 - offset;
-
-    //     // Ограничиваем позицию игрока в этих пределах
-    //     Vector3 pos = transform.position;
-    //     pos.x = Mathf.Clamp(pos.x, minX, maxX);
-    //     pos.y = Mathf.Clamp(pos.y, minY, maxY);
-    //     transform.position = pos; 
-    // }
 
     void FixedUpdate()
 	{
         Vector2 targetPos = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
-        
-		// float clampedX = Mathf.Clamp(targetPos.x, minX, maxX);
-		// float clampedY = Mathf.Clamp(targetPos.y, minY, maxY);
-		// targetPos = new Vector2(clampedX, clampedY);
 
 		rb.MovePosition(targetPos);
 	}
