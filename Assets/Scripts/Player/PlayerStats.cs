@@ -7,25 +7,34 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    public int СurrentHealth { get; private set; }
+    public int currentHealth;
 
     public event Action<float> OnHealthChanged;
 
     private void Awake()
     {
-        СurrentHealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
     public void TakeDamage(int damage)
     {
-        СurrentHealth -= damage;
+        currentHealth -= damage;
 
-        OnHealthChanged?.Invoke(СurrentHealth);
+        OnHealthChanged?.Invoke(currentHealth);
 
-        if (СurrentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    public void ModifyHealth(int amount)
+    {
+        currentHealth += amount;
+
+        Debug.Log("Player health modified by " + amount + ". Current health: " + currentHealth);
+
+        OnHealthChanged?.Invoke(currentHealth);
     }
 
     private void Die()

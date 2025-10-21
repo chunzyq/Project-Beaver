@@ -13,16 +13,16 @@ public class FollowPlayerAI : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-        agent.updatePosition = false;
         agent.speed = followSpeed;
     }
 
     void FixedUpdate()
     {
-        // Vector3 desiredPosition = (target.position - transform.position).normalized;
+        if (agent == null || !agent.isOnNavMesh || target == null) return;
         agent.SetDestination(target.position);
     }
 }

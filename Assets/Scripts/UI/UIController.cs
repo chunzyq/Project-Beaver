@@ -9,14 +9,19 @@ public class UIController : MonoBehaviour
     [Inject] private PlayerStats playerStats;
     [SerializeField] private TextMeshProUGUI hpAmount;
 
-    void Awake()
+    void OnEnable()
     {
         playerStats.OnHealthChanged += UpdateHPUI;
     }
 
+    void OnDisable()
+    {
+        playerStats.OnHealthChanged -= UpdateHPUI;
+    }
+
     private void Start()
     {
-        UpdateHPUI(playerStats.СurrentHealth);
+        UpdateHPUI(playerStats.currentHealth);
     }
 
     private void UpdateHPUI(float newHealth)
