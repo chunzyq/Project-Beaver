@@ -1,5 +1,6 @@
 using System.Collections;
 using NavMeshPlus.Components;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Tilemaps;
@@ -22,6 +23,7 @@ public class MapGenerator : MonoBehaviour
     [Header("Tiles")]
     [SerializeField] private TileBase grassTile;
     [SerializeField] private TileBase waterTile;
+    [SerializeField] private TileBase sandTile;
 
     [Header("Player")]
     [SerializeField] private GameObject player;
@@ -42,6 +44,7 @@ public class MapGenerator : MonoBehaviour
         GenerateMap();
     }
 
+    [ContextMenu("Generate Map")]
     private void GenerateMap()
     {
         offsetX = UnityEngine.Random.Range(0f, 9999f);
@@ -58,13 +61,17 @@ public class MapGenerator : MonoBehaviour
             {
                 float xCoord = (float)x / width * scale + offsetX;
                 float yCoord = (float)y / height * scale + offsetY;
-
                 float noiseValue = Mathf.PerlinNoise(xCoord, yCoord);
 
                 if (noiseValue < 0.30f)
                 {
                     waterTilemap.SetTile(new Vector3Int(x, y, 0), waterTile);
                     mapData[x, y] = waterTile;
+                }
+                else if (noiseValue < 0.55f)
+                {
+                    groundTilemap.SetTile(new Vector3Int(x, y, 0), sandTile);
+                    mapData[x, y] = sandTile;
                 }
                 else
                 {
@@ -158,6 +165,6 @@ public class MapGenerator : MonoBehaviour
         if (x < 0 || y < 0 || x >= width || y >= height)
         return false;
 
-        return mapData[x, y] == grassTile;
+        return mapData[x, y] == grassTile || mapData[x, y] == sandTile;
     }
 }
