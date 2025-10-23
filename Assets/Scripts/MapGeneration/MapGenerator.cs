@@ -23,7 +23,6 @@ public class MapGenerator : MonoBehaviour
     [Header("Tiles")]
     [SerializeField] private TileBase grassTile;
     [SerializeField] private TileBase waterTile;
-    [SerializeField] private TileBase sandTile;
 
     [Header("Player")]
     [SerializeField] private GameObject player;
@@ -67,11 +66,6 @@ public class MapGenerator : MonoBehaviour
                 {
                     waterTilemap.SetTile(new Vector3Int(x, y, 0), waterTile);
                     mapData[x, y] = waterTile;
-                }
-                else if (noiseValue < 0.55f)
-                {
-                    groundTilemap.SetTile(new Vector3Int(x, y, 0), sandTile);
-                    mapData[x, y] = sandTile;
                 }
                 else
                 {
@@ -165,6 +159,6 @@ public class MapGenerator : MonoBehaviour
         if (x < 0 || y < 0 || x >= width || y >= height)
         return false;
 
-        return mapData[x, y] == grassTile || mapData[x, y] == sandTile;
+        return mapData[x, y] == grassTile;
     }
 }
