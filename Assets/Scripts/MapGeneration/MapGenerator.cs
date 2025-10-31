@@ -37,6 +37,7 @@ public class MapGenerator : MonoBehaviour
     private TileBase[,] mapData;
 
     [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private ArenaZoneSpawner zoneSpawner;
 
     void Start()
     {
@@ -80,7 +81,9 @@ public class MapGenerator : MonoBehaviour
 
         StartCoroutine(RebuildNavMeshLater());
         StartCoroutine(SpawnPlayerAfterNavMesh());
+        StartCoroutine(SpawnArenaZoneAfderNavMesh());
         StartCoroutine(SpawnEnemiesAfterNavMesh());
+
         SpawnItems();
     }
 
@@ -109,6 +112,13 @@ public class MapGenerator : MonoBehaviour
         {
             player.transform.position = spawnPos;
         }
+    }
+
+    private IEnumerator SpawnArenaZoneAfderNavMesh()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        zoneSpawner.SpawnZones(mapData, grassTile, width, height);
     }
 
     private IEnumerator SpawnEnemiesAfterNavMesh()
